@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Hilo de mis días</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Encabezado con avatar -->
+    <header class="app-header">
+      <div class="avatar-container">
+        <img src="https://via.placeholder.com/80" alt="Avatar" id="avatar" class="avatar">
+        <button class="avatar-change-btn" onclick="document.getElementById('avatar-upload').click()">Cambiar</button>
+        <input type="file" id="avatar-upload" accept="image/*" style="display:none;">
+      </div>
+      <h1>Hilo de mis días</h1>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="tabs">
+      <button class="tab-button active" data-tab="diario">📝 Diario</button>
+      <button class="tab-button" data-tab="recuerdos">🖼️ Recuerdos</button>
+      <button class="tab-button" data-tab="juegos">🎮 Juegos</button>
+      <button class="tab-button" data-tab="perfil">👤 Perfil</button>
+    </nav>
+
+    <!-- Contenido de las pestañas -->
+    <div class="tab-content active" id="diario">
+      <div class="diary-container">
+        <label for="date">Fecha:</label>
+        <input type="date" id="date">
+        <label for="entry">Escribe tu día:</label>
+        <textarea id="entry" placeholder="¿Cómo fue tu día?"></textarea>
+        <button onclick="guardarEntrada()">Guardar</button>
+        <h3>📚 Entradas anteriores:</h3>
+        <div class="entries" id="entries"></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="recuerdos">
+      <div class="memories-container">
+        <h2>Tus recuerdos</h2>
+        <input type="file" id="memory-upload" accept="image/*,video/*" multiple style="display:none;">
+        <button onclick="document.getElementById('memory-upload').click()">➕ Añadir fotos/videos</button>
+        <div class="memories-grid" id="memories-grid">
+          <!-- Aquí se mostrarán los recuerdos -->
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="juegos">
+      <div class="games-container">
+        <h2>Juegos para la memoria</h2>
+        <div class="game-card" onclick="window.open('https://es.memozor.com/simon-game/play', '_blank')">
+          <h3>Simón dice</h3>
+          <p>Juego clásico de memoria</p>
+        </div>
+        <div class="game-card" onclick="window.open('https://www.cerebriti.com/juegos-de-memoria', '_blank')">
+          <h3>Encuentra las parejas</h3>
+          <p>Encuentra los pares de cartas iguales</p>
+        </div>
+        <div class="game-card" onclick="window.open('https://www.mundoprimaria.com/juegos-educativos/juegos-memoria', '_blank')">
+          <h3>Memoria visual</h3>
+          <p>Recuerda patrones y secuencias</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="perfil">
+      <div class="profile-container">
+        <h2>Tu perfil</h2>
+        <div class="avatar-large-container">
+          <img src="https://via.placeholder.com/150" alt="Avatar grande" id="avatar-large" class="avatar-large">
+        </div>
+        <div class="profile-info">
+          <label>Nombre:</label>
+          <input type="text" id="user-name" placeholder="Tu nombre">
+          <button onclick="guardarPerfil()">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
