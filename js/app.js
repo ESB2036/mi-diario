@@ -4,12 +4,21 @@ const entryInput = document.getElementById('entry');
 const entriesDiv = document.getElementById('entries');
 
 function guardarEntrada() {
-  const fecha = dateInput.value;
+  let fecha = dateInput.value;
   const texto = entryInput.value.trim();
 
   if (!fecha || !texto) {
     alert("Por favor, ingresa una fecha y escribe sobre tu día.");
     return;
+  }
+
+  // Ajustar la fecha para evitar problemas de zona horaria
+  if (fecha) {
+    const fechaObj = new Date(fecha);
+    // Añadir un día para compensar el desfase horario
+    fechaObj.setDate(fechaObj.getDate() + 1);
+    // Formatear nuevamente a YYYY-MM-DD
+    fecha = fechaObj.toISOString().split('T')[0];
   }
 
   localStorage.setItem(`diario-${fecha}`, texto);
@@ -119,24 +128,3 @@ window.onload = function() {
   const today = new Date().toISOString().split('T')[0];
   dateInput.value = today;
 };
-
-// Ajustar el viewport cuando el teclado aparece en móviles
-function adjustViewport() {
-  if (window.innerWidth < 600) {
-    const viewport = document.querySelector('meta[name="viewport"]');
-    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
-  }
-}
-
-// Llamar a la función al cargar y al redimensionar
-window.addEventListener('load', adjustViewport);
-window.addEventListener('resize', adjustViewport);
-
-// Manejar el enfoque en textareas en móviles
-entryInput.addEventListener('focus', function() {
-  if (window.innerWidth < 600) {
-    setTimeout(() => {
-      this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 300);
-  }
-});
